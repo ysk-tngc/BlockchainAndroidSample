@@ -24,26 +24,41 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/mine_button" />
 
-    <TextView
-        android:id="@+id/log_view"
+    <ScrollView
+        android:id="@+id/log_scroll_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="Log View"
-        app:layout_constraintBottom_toTopOf="@+id/chain_view"
+        app:layout_constraintBottom_toTopOf="@id/chain_scroll_view"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/send_button" />
+        app:layout_constraintTop_toBottomOf="@id/send_button">
 
-    <TextView
-        android:id="@+id/chain_view"
+        <TextView
+            android:id="@+id/log_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Log View" />
+
+    </ScrollView>
+
+    <ScrollView
+        android:id="@+id/chain_scroll_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="Chain View"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/log_view" />
+        app:layout_constraintTop_toBottomOf="@id/log_scroll_view">
+
+        <TextView
+            android:id="@+id/chain_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Chain View" />
+
+    </ScrollView>
+
 
 </android.support.constraint.ConstraintLayout>

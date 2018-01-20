@@ -1,17 +1,18 @@
 package com.example.ysk.blockchainkotlinandroid.BlockChain
 
+import android.util.Log
+
 final class BlockChain {
 
     private var currentTransactions: MutableList<Transaction> = mutableListOf()
     var chain: MutableList<Block> = mutableListOf()
 
     init {
-
+        createBlock(100, "1".toByteArray())
     }
 
     fun createBlock(proof: Int, previousHash: ByteArray? = null): Block {
         val prevHash = previousHash ?: chain.last().hash()
-        val timestamp = System.currentTimeMillis()
         val block = Block(chain.count() + 1,
                 System.currentTimeMillis(),
                 currentTransactions, proof, prevHash)
@@ -25,7 +26,7 @@ final class BlockChain {
         val transaction = Transaction(sender, recipient, amount)
         currentTransactions.add(transaction)
 
-        return chain.lastIndex + 1
+        return chain.last().index + 1
     }
 }
 
@@ -34,6 +35,9 @@ fun proofOfWork(lastProof: Int): Int {
 
     while (!validProof(lastProof, proof)) {
         proof += 1
+        if (proof % 100 == 0) {
+            Log.d("BlockChain", "proof: " + proof)
+        }
     }
     return proof
 }
@@ -41,6 +45,6 @@ fun proofOfWork(lastProof: Int): Int {
 fun validProof(lastProof: Int, proof: Int): Boolean {
     val guess = (lastProof.toString() + proof.toString()).toByteArray()
     val guessHash = guess.sha256().hexDigest()
-    return guessHash.startsWith("0000")
+    return guessHash.startsWith("000")
 
 }

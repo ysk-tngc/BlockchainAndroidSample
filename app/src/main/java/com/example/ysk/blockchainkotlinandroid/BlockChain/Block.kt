@@ -28,8 +28,9 @@ data class Block(
     }
 }
 
+private val messageDigest = MessageDigest.getInstance("SHA-256")
+
 fun ByteArray.sha256(): ByteArray {
-    val messageDigest = MessageDigest.getInstance("SHA-256")
     messageDigest.update(this)
     return messageDigest.digest()
 }
